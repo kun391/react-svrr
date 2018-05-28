@@ -1,5 +1,4 @@
 import React from 'react';
-import Navbar from './Navbar.jsx';
 
 class Header extends React.Component {
   constructor(props, context) {
@@ -40,7 +39,7 @@ class Header extends React.Component {
                   <h1 className="navbar-brand logo"><a href={`/`}><span className="ficon ficon-logo"></span></a></h1>
                 </div>
                 <div className="navbar-collapse">
-                  <Navbar currentUser={this.props.currentUser} />
+                  Navbar
                 </div>
               </nav>
             </div>

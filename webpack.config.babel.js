@@ -52,10 +52,9 @@ var resolve = {
     'assets': path.resolve(__dirname, './src/assets/'),
     'global_styles': path.resolve(__dirname, './src/assets/styles/'),
     'constants': path.resolve(__dirname, './src/constants'),
-    'api': path.resolve(__dirname, './src/api/'),
-    'app': path.resolve(__dirname, './src/components/app'),
+    'containers': path.resolve(__dirname, './src/containers/'),
     'pages': path.resolve(__dirname, './src/containers/pages'),
-    'layout': path.resolve(__dirname, './src/components/layout'),
+    'layouts': path.resolve(__dirname, './src/components/layouts'),
     'modules': path.resolve(__dirname, './src/components/modules'),
     'build': path.resolve(__dirname, './build'),
     'partials': path.resolve(__dirname, './src/components/modules/partials'),
@@ -160,8 +159,6 @@ module.exports = function (env) {
           'jquery',
           './src/index.js',
           'bootstrap/dist/css/bootstrap.css',
-          'slick-carousel/slick/slick.css',
-          'slick-carousel/slick/slick-theme.css',
           'global_styles/_main.scss'
         ],
       },
@@ -178,7 +175,7 @@ module.exports = function (env) {
         //   });
         // },
         new HtmlWebpackPlugin({
-          template: path.resolve('./src/', 'index.ejs'),
+          // template: path.resolve('./src/', 'index.ejs'),
           favicon: path.resolve('./src/', 'assets/images/favicon.ico'),
           minify: {
             collapseWhitespace: true
@@ -221,8 +218,6 @@ module.exports = function (env) {
         app: [
           'babel-polyfill',
           'bootstrap/dist/css/bootstrap.css',
-          'slick-carousel/slick/slick.css',
-          'slick-carousel/slick/slick-theme.css',
           'global_styles/_main.scss',
           './src/server.js'
         ],

@@ -1,12 +1,17 @@
 import React from 'react';
 import {RouterContext} from 'react-router';
-import {store} from './routes/index.jsx';
 import Promise from 'bluebird';
 import ReactDOMServer from 'react-dom/server';
 import {Server} from 'http';
 import {Provider} from 'react-redux';
-var cookieParser = require('cookie-parser');
-import * as actions from 'actions';
+import cookieParser from 'cookie-parser';
+import { renderToString } from 'react-dom/server';
+import StaticRouter from 'react-router/StaticRouter';
+import { ReduxAsyncConnect, loadOnServer, reducer as reduxAsyncConnect } from 'redux-connect';
+import { HandleRoute } from './routes';
+import { parse as parseUrl } from 'url';
+import { createStore, combineReducers } from 'redux';
+import serialize from 'serialize-javascript';
 
 module.exports = {
   run: function() {
@@ -19,7 +24,7 @@ module.exports = {
 
     const match = reactRouter.match;
 
-    const routes = require('./routes/routes').default();
+    const routes = require('./routes/routes').default;
     let cssFile, jsFile, production;
 
     if (process.env.NODE_ENV === 'development') {
@@ -50,42 +55,6 @@ module.exports = {
       '/bundle.server.js'
     ];
 
-    let render = function(req, renderProps, initialData) {
-      return ReactDOMServer.renderToString(
-        <Provider store={store}>
-          <RouterContext {...renderProps}/>
-        </Provider>
-      );
-    }
-
-    let getReduxPromise = (renderProps, request) => {
-      let { query, params } = renderProps;
-
-      let comp = renderProps.components[renderProps.components.length - 1];
-
-      let at = null;
-
-      if (request && request.cookies && request.cookies.accessToken) {
-        at = request.cookies.accessToken
-      }
-
-      if (comp.fetchData) {
-        return comp.fetchData({ query, params, store, at }).then(response => {
-          if (request) {
-            if (request.cookies && request.cookies.accessToken && request.cookies.userInfo) {
-              store.dispatch(actions.auth(JSON.parse(request.cookies.userInfo)));
-            } else {
-              store.dispatch(actions.logout());
-            }
-
-          }
-          return Promise.resolve({response, state: store.getState()})
-        });
-      } else {
-        return Promise.resolve();
-      }
-    }
-
     const app = express();
     const server = new Server(app);
 
@@ -94,7 +63,6 @@ module.exports = {
     app.use(cookieParser());
 
     app.set('view engine', 'ejs');
-    //app.set('views', path.join(__dirname, './'));
 
     staticFiles.forEach(file => {
       app.get(file, (req, res) => {
@@ -103,108 +71,52 @@ module.exports = {
       });
     });
 
-    app.get('*', (request, response) => {
-      let htmlFilePath = path.resolve('build/index.html' );
-      // let htmlFilePath = path.join(__dirname, '/build', 'index.html');
-      let error = () => response.status(404).send('404 - Page not found');
-      fs.readFile(htmlFilePath, 'utf8', (err, htmlData) => {
-        if (err) {
-          error();
-        } else {
-          match({routes, location: request.url}, (err, redirect, renderProps) => {
-            if (err) {
-              error();
-            } else if (redirect) {
-              response.redirect(302, redirect.pathname + redirect.search)
-            } else if (renderProps) {
-              let parseUrl = request.url.split('/');
+    app.get('*', (req, res) => {
+      const store = createStore(combineReducers({ reduxAsyncConnect }))
+      const url = req.originalUrl || req.url
+      const location = parseUrl(url)
 
-              if (request.url.startsWith('/')) {
-                parseUrl = request.url.replace('/', '').split('/');
-              }
+      // 1. load data
+      loadOnServer({ store, location, routes })
+        .then(() => {
+          const context = {}
 
-              if (request.cookies.userInfo) {
-                const userInfo = JSON.parse(request.cookies.userInfo);
+          // 2. use `ReduxAsyncConnect` to render component tree
+          const appHTML = renderToString(
+            <Provider store={store} key="provider">
+              <StaticRouter location={location} context={context}>
+                <HandleRoute routes={routes} />
+              </StaticRouter>
+            </Provider>
+          )
+          // handle redirects
+          if (context.url) {
+            return res.redirect(context.url);
+          //   req.header('Location', context.url)
+          //   return res.send(302)
+          }
 
-                if (parseUrl[0] && parseUrl[0] === 'profile' && userInfo) {
-                  if (renderProps.params['id'].toString() !== userInfo.id.toString()) {
-                    parseUrl[1] = userInfo.id.toString();
-                    const url = '/' + parseUrl.join('/');
-                    return response.redirect(url);
-                  }
-                }
-
-                if (parseUrl[0] && parseUrl[0] === 'clubs' && userInfo) {
-                  if (parseUrl.length > 1 && userInfo.get_member_club_ids.indexOf(parseInt(renderProps.params['id'])) === -1) {
-                    if (userInfo.get_member_club_ids.length === 1) {
-                      parseUrl[1] = userInfo.get_member_club_ids[0].toString();
-                      const url = '/' + parseUrl.join('/');
-                      return response.redirect(url);
-                    } else {
-                      return response.redirect('/clubs');
-                    }
-                  }
-                }
-              }
-
-              getReduxPromise(renderProps, request).then((initialData) => {
-                let generatedContent = initialData.response ? render(request, renderProps, initialData.response) : render(request, renderProps, {});
-
-                const title = initialData.response.seo.title || '';
-                const description = initialData.response.seo.description || '';
-                const image = initialData.response.seo.image || '';
-
-                var draft = [];
-
-                const currentState =  initialData.state;
-
-                if (currentState) {
-                  const reduxState = JSON.stringify(currentState, function(key, value) {
-                    if (typeof value === 'object' && value !== null) {
-                      if (draft.indexOf(value) !== -1) {
-                        // Circular reference found, discard key
-                        return;
-                      }
-                      // Store value in our collection
-                      draft.push(value);
-                    }
-                    return value;
-                  });
-                  draft = null;
-
-                  ejs.renderFile(
-                    path.resolve('./src/index.ejs' ),
-                    {
-                      jsFile,
-                      cssFile,
-                      production,
-                      generatedContent,
-                      reduxState,
-                      title,
-                      description,
-                      image
-                    }, {},
-                    function(err, str) {
-                      if (err) {
-                        console.log(err);
-                      }
-                      response.status(200).send(str);
-                    });
-                } else {
-                  error();
-                }
-
-              }).catch(err => {
-                error();
-              });
-
-            } else {
-              error();
-            }
-          });
-        }
-      })
+          // 3. render the Redux initial data into the server markup
+          const html = createPage(appHTML, store)
+          res.send(html)
+        })
     });
+
+    function createPage(html, store) {
+      return `
+        <!doctype html>
+        <html>
+          <body>
+            <div id="app">${html}</div>
+
+            <!-- its a Redux initial data -->
+            <script type="text/javascript">
+              window.__REDUX__=${serialize(store.getState())};
+            </script>
+          </body>
+        </html>
+      `
+    }
 
     server.listen(8081, function() {
       console.log(`Listening at http://localhost:${server.address().port}`);

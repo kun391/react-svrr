@@ -8,12 +8,6 @@ import axios from 'axios';
 class MasterLayout extends React.Component {
   constructor(props, context) {
     super(props, context);
-
-    let at = cookie.load('accessToken');
-
-    if (at) {
-      axios.defaults.headers.common['Authorization'] = `Token ${at}`;
-    }
   }
 
   render() {

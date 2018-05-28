@@ -1,9 +1,0 @@
-.signup-container {
-  @extend .signin-container;
-  .left-container {
-    min-height: 650px;
-  }
-  .right-container {
-    background-image: url(#{$img-url}bg-signup.png);
-  }
-}
