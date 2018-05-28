@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <% if (production) { %>
+    <script src="https://cdn.ravenjs.com/3.24.1/raven.min.js"
+      crossorigin="anonymous"></script>
+    <script type="text/javascript">
+      Raven.config('https://5e2d109f0dae4fea8c390f8241c0cca0@sentry.io/252921').install()
+    </script>
+    <% } %>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-60040784-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-60040784-1', {'transport_type': 'beacon'});
+    </script>
+
+    <title><%- title %></title>
+    <meta name="description" content="<%- description %>"/>
+    <meta property="og:description" content="<%- description %>" />
+    <meta property="og:image" content="<%- image %>" />
+    <meta property="og:site_name" content="SWIVELBEAUTY.COM">
+    <meta property="og:title" content="<%- title %>" />
+    <meta property="og:type" content="">
+    <meta property="og:url" content="" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="<%- title %>" />
+    <meta name="twitter:image:src" content="<%- image %>" />
+    <meta name="twitter:image:alt" content="<%- title %>" />
+    <meta name="twitter:description" content="<%- description %>" />
+    <meta name="twitter:site" content="@swivelbeauty" />
+    <meta name="twitter:creator" content="@swivelbeauty" />
+    <meta name="twitter:domain" content="www.swivelbeauty.com" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+    <meta name="apple-mobile-web-app-title" content="SWIVELBEAUTY.COM">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="HandheldFriendly" content="True">
+    <meta http-equiv="cleartype" content="on">
+    <link href="<%- cssFile %>" rel="stylesheet"/>
+    <script type="text/javascript" charset="utf-8">
+      window.__REDUX_STATE__ = <%- reduxState %>;
+    </script>
+  </head>
+  <body>
+    <div id="root"><%- generatedContent %></div>
+    <script type="text/javascript" src="<%- jsFile %>" defer></script>
+  </body>
+</html>

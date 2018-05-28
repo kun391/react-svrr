@@ -1,0 +1,217 @@
+.banner-container {
+  background-color: #1D1310;
+  max-height: 765px;
+  overflow: hidden;
+  position: relative;
+  .slick-slider {
+    position: static;
+    .slider-item {
+      width: 100%;
+    }
+  }
+  .slider-image {
+    width: 100%;
+    height: auto;
+    @include breakpoint(600) {
+      width: auto;
+      height: 600px;
+      // transform: translateX(-10%);
+    }
+  }
+  .slick-dots {
+    bottom: 45px;
+    li {
+      width: 12px;
+      height: 12px;
+      button {
+        width: 12px;
+        height: 12px;
+        &:before {
+          background-color: #FFF;
+          border-radius: 50%;
+          color: #FFF;
+          content: '';
+          opacity: .24;
+          width: 12px;
+          height: 12px;
+        }
+      }
+      &.slick-active {
+        button:before {
+          opacity: 1;
+        }
+      }
+    }
+    @include breakpoint(767) {
+      display: none !important;
+    }
+  }
+  .intro {
+    margin-top: -40px;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    .banner-title, .intro-title {
+      color: #FFF;
+      @include rem('font-size', 30);
+      font-weight: 300;
+      letter-spacing: 2.27px;
+      padding: 0 30px 30px;
+      line-height: 1.3;
+      @include breakpoint(1024) {
+        @include rem('font-size', 20);
+      }
+    }
+    .btn-create-club {
+      background-color: #FFF;
+      border: 1px solid #1B1615;
+      color: #1B1615;
+      @include rem('font-size', 17);
+      font-weight: 600;
+      padding: 13px 50px;
+    }
+  }
+}
+.bg-homepage-fix {
+  .banner-container-fix {
+    background-color: #fff;
+    .slick-slider {
+      text-align: right;
+    }
+    .slider-image {
+      display: inline-block;
+      max-width: 100%;
+      width: 50%;
+      height: auto;
+      padding-top: 125px;
+      @include breakpoint(600) {
+        width: 80%;
+        padding-top: 100px;
+      }
+    }
+    .slick-dots {
+      display: none !important;
+    }
+    .intro {
+      left: 1%;
+      max-width: 870px;
+      .banner-title, .intro-title {
+        @include rem('font-size', 48);
+        color: #1B1615;
+        @include breakpoint(1300) {
+          @include rem('font-size', 40);
+        }
+        @include breakpoint(1024) {
+          @include rem('font-size', 30);
+        }
+      }
+      @include breakpoint(1300) {
+        max-width: 770px;
+      }
+      @include breakpoint(1024) {
+        max-width: 570px;
+      }
+      @include breakpoint(600) {
+        left: 0;
+      }
+    }
+  }
+}
+
+.fixed-banner {
+  overflow: hidden;
+  .intro {
+    .banner-title {
+      @include rem('font-size', 45);
+      font-weight: 500;
+      @include rem('line-height', 63);
+      letter-spacing: 3.4px;
+      text-transform: uppercase;
+      @include breakpoint(600) {
+        @include rem('font-size', 35);
+        @include rem('line-height', 50);
+        letter-spacing: 3px;
+      }
+    }
+    .banner-description {
+      color: #FFF;
+      @include rem('font-size', 16);
+      font-weight: 300;
+      line-height: 1.5625;
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+  }
+  .image {
+    opacity: .7;
+    width: 100%;
+    @include breakpoint(767) {
+      width: auto;
+      height: 100%;
+    }
+  }
+}
+.about-banner {
+  min-height: 250px;
+  max-height: 765px;
+  .intro {
+    .banner-title {
+      padding-bottom: 10px;
+    }
+  }
+  @include breakpoint(767) {
+    max-height: 665px;
+    .image {
+      @include transform-customize(translateX(-30%));
+    }
+  }
+  @include breakpoint(500) {
+    .image {
+      @include transform-customize(translateX(-40%));
+    }
+  }
+}
+
+.faq-banner {
+  max-height: 385px;
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 145px;
+    background: -moz-linear-gradient(top, rgba(152,88,49,1) 0%, rgba(152,88,49,0) 100%);
+    background: -webkit-linear-gradient(top, rgba(152,88,49,1) 0%,rgba(152,88,49,0) 100%);
+    background: linear-gradient(to bottom, rgba(152,88,49,1) 0%,rgba(152,88,49,0) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#985831', endColorstr='#00985831',GradientType=0 );
+    opacity: .69;
+    z-index: 1;
+  }
+  .image {
+    opacity: 1;
+  }
+}
+
+.featured-books-banner {
+  background-color: #985831;
+  min-height: 250px;
+  max-height: 385px;
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 135px;
+    background: -moz-linear-gradient(top, rgba(152,88,49,1) 0%, rgba(152,88,49,0) 100%);
+    background: -webkit-linear-gradient(top, rgba(152,88,49,1) 0%,rgba(152,88,49,0) 100%);
+    background: linear-gradient(to bottom, rgba(152,88,49,1) 0%,rgba(152,88,49,0) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#985831', endColorstr='#00985831',GradientType=0 );
+    opacity: .49;
+    z-index: 1;
+  }
+}

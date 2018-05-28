@@ -1,0 +1,50 @@
+.invitation-container {
+  padding-top: 66px;
+}
+.invitation-content {
+  max-width: 410px;
+  margin: 0 auto;
+  padding: 50px 0;
+  .image {
+    display: block;
+    max-width: 75px;
+    margin: 0 auto;
+  }
+  .title {
+    text-align: center;
+    @include rem('font-size', 32);
+    font-weight: 300;
+    line-height: 1.34375;
+    display: block;
+    padding: 25px 0;
+    b {
+      display: block;
+    }
+  }
+  .btn.btn-join {
+    background-color: #2C2827;
+    color: #FFF;
+    font-weight: 300;
+    width: 100%;
+    height: 50px;
+  }
+  .txt-forgot-link {
+    color: #454140;
+    display: inline-block;
+    @include rem('font-size', 16);
+    line-height: 1.1875;
+  }
+  .bottom {
+    padding-top: 30px;
+    text-align: center;
+  }
+  .btn.btn-signin {
+    border: 2px solid #E3D3C5;
+    color: #0A0A0A;
+    font-weight: 300;
+    width: 100%;
+    height: 50px;
+    line-height: 28px;
+    margin: 15px 0 0;
+  }
+}

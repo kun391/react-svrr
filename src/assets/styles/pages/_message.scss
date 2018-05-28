@@ -1,0 +1,175 @@
+.message-container {
+  .right-container {
+    padding: 10px 10px 0 0;
+  }
+  .block-header {
+    padding-left: 0;
+  }
+  .block-my-clubs {
+    padding: 10px 0 10px 30px;
+    @include breakpoint(768) {
+      padding-left: 10px;
+    }
+  }
+  .block-title {
+    color: #564434;
+    @include rem('font-size', 25);
+    font-weight: 700;
+    text-transform: capitalize;
+  }
+  .form-message {
+    padding-bottom: 10px;
+    .form-group {
+      float: left;
+      padding-right: 20px
+    }
+    .form-control {
+      background-color: #FFF;
+      border-color: #CBCBCB;
+      width: 340px;
+      max-width: 600px;
+      min-height: 54px;
+      @include breakpoint(800) {
+        width: 330px;
+      }
+    }
+    .btn.btn-create-new-message {
+      background-color: #000;
+      color: #FFF;
+      height: 54px;
+    }
+  }
+}
+.list-message-container {
+  .message-group {
+    border-radius: 6px;
+    padding: 17px 32px;
+    margin-bottom: 10px;
+    &:nth-child(2n-1) {
+      background-color: rgba(240, 240, 240, .7);
+    }
+  }
+  .title-date-time {
+    color: #3C3737;
+    @include rem('font-size', 14);
+    font-weight: 700;
+    padding-bottom: 22px;
+  }
+  .list-group-message {
+    border-left: 1px solid #ddd;
+    max-height: 300px;
+    margin-bottom: 15px;
+    overflow: auto;
+    padding-left: 25px;
+  }
+  .main-message {
+    // border-bottom: 1px solid #ddd;
+    margin-bottom: 0;
+  }
+  .list-message {
+    border-left: 1px solid rgba(151, 151, 151, .24);
+    padding-left: 25px;
+  }
+  .btn-view-more {
+    border: none;
+    background: none;
+    border-bottom: 1px solid #ddd;
+    display: block;
+    @include rem('font-size', 14);
+    padding: 0;
+    margin: 0 auto 15px;
+  }
+  .message-item {
+    clear: both;
+    margin-bottom: 18px;
+    .avatar {
+      background-size: cover;
+      background-position: center;
+      border-radius: 6px;
+      width: 45px;
+      height: 45px;
+      margin-right: 15px;
+      float: left;
+      overflow: hidden;
+      .image {
+        max-width: 100%;
+        height: auto;
+        opacity: 0;
+      }
+    }
+    .username {
+      @include rem('font-size', 14);
+      font-weight: 700;
+      float: left;
+      margin-right: 15px;
+      a {
+        color: #3C3737;
+        &:hover {
+          color: #000;
+        }
+      }
+    }
+    .date-time {
+      color: #9C9C9C;
+      display: block;
+      @include rem('font-size', 12);
+      font-weight: 400;
+      line-height: 1.8333333333;
+    }
+    .message-text {
+      color: #3C3737;
+      @include rem('font-size', 14);
+      font-weight: 400;
+      line-height: 1.1428571429;
+      overflow: hidden;
+    }
+    &:last-child {
+      margin: 0;
+    }
+  }
+  .input-reply-message {
+    position: relative;
+    .form-control {
+      border-color: #B2B2B2;
+      height: 43px;
+      padding-left: 40px;
+      padding-bottom: 6px;
+    }
+    .ficon-smiling {
+      color: #9B9B9B;
+      position: absolute;
+      top: 13px;
+      left: 14px;
+      z-index: 10;
+    }
+    .reply-form {
+      position: relative;
+      .btn-post-reply {
+        background-color: #000;
+        border-radius: 50px;
+        color: #FFF;
+        position: absolute;
+        top: 0;
+        right: 1px;
+        width: 60px;
+        height: 43px;
+      }
+    }
+  }
+}
+.no-messages {
+  @extend .no-meetings;
+  .input-message {
+    padding: 20px 10px 10px;
+    .form-control {
+      border: 1px solid #D5D5D5;
+      border-radius: 7px;
+      box-shadow: none;
+      color: #BBB8B4;
+      max-width: 500px !important;
+      margin: 0 auto;
+      height: 120px !important;
+      padding: 10px 15px;
+    }
+  }
+}

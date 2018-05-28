@@ -1,0 +1,45 @@
+.main-form {
+  .form-group {
+    .form-control {
+      border: 1px solid #C5C5C5;
+      border-radius: 50px;
+      box-shadow: none;
+      color: #333;
+      height: 54px;
+      padding: 5px 25px;
+      &.error {
+        border-color: #D80D0D !important;
+      }
+      &:focus {
+        border-color: #A2A2A2;
+      }
+    }
+    .btn.btn-form-default {
+      background-color: #2C2827;
+      color: #FFF;
+      font-weight: 300;
+      width: 100%;
+      height: 54px;
+      text-transform: uppercase;
+    }
+    .notification-message {
+      color: #333;
+      display: none;
+      @include rem('font-size', 14);
+      padding: 6px 5px 0;
+      text-align: center;
+      &.error {
+        color: #D80D0D;
+      }
+      &.success {
+        color: #04B91D;
+      }
+      &.show {
+        display: block;
+      }
+      &:first-letter {
+        text-transform: uppercase;
+      }
+    }
+  }
+}

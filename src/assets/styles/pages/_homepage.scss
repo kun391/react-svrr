@@ -1,0 +1,371 @@
+.home-container {
+  .block-container {
+    padding: 45px 0 30px;
+    .block-title {
+      @include rem('font-size', 20);
+      @include rem('line-height', 25);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      text-align: center;
+      padding-bottom: 45px;
+      @include breakpoint(1024) {
+        padding-bottom: 35px;
+      }
+    }
+    @include breakpoint(767) {
+      padding: 35px 0 25px;
+    }
+    @include breakpoint(767) {
+      padding: 35px 0;
+      padding-bottom: 25px;
+    }
+  }
+  .block-featured-book {
+    background-color: #000;
+    padding: 80px 0 30px;
+    position: relative;
+    @include breakpoint(1024) {
+      padding-top: 45px;
+      padding-bottom: 45px;
+    }
+    @include breakpoint(767) {
+      padding-top: 20px;
+      padding-bottom: 0;
+    }
+    .bg-home-featured-book {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      overflow: hidden;
+      .bg-image {
+        background-position: top;
+        background-repeat: no-repeat;
+        background-size: cover;
+        min-width: 100%;
+        min-height: 100%;
+        opacity: .34;
+        -webkit-filter: blur(10px);
+        filter: blur(10px);
+        position: absolute;
+        top: 0;
+        left: -35px;
+        right: -35px;
+        bottom: -35px;
+      }
+    }
+    .center {
+      position: relative;
+      z-index: 10;
+    }
+    .block-title {
+      color: #FFF;
+      @include rem('font-size', 13);
+      font-weight: 400;
+      text-transform: uppercase;
+      text-align: left;
+      opacity: .8;
+      padding: 20px 10px 20px 0;
+      @include breakpoint(767) {
+        color: #000;
+        opacity: .8;
+        font-weight: 400;
+        padding-left: 15px;
+        padding-right: 15px;
+      }
+    }
+    .book-title {
+      color: #FFF;
+      font-family: 'Merriweather', serif;
+      @include rem('font-size', 37);
+      @include rem('line-height', 54);
+      font-weight: 600;
+      .txt-link {
+        color: #FFF;
+        display: block;
+      }
+      @include breakpoint(1024) {
+        @include rem('font-size', 25);
+        @include rem('line-height', 34);
+        font-weight: 400;
+      }
+    }
+    .author {
+      color: #FFF;
+      @include rem('font-size', 18);
+      font-weight: 300;
+      padding-top: 10px;
+      @include breakpoint(767) {
+        @include rem('font-size', 15);
+      }
+    }
+    .book-image {
+      @extend .wrap-image;
+      box-shadow: 0 21px 21px rgba(0, 0, 0, .5);
+      margin-bottom: -80px;
+      margin-right: 4%;
+      display: block;
+      max-width: 360px;
+      z-index: 10;
+      .image {
+        max-width: 100%;
+        width: 100%;
+        height: auto;
+      }
+      @include breakpoint(767) {
+        max-width: 230px;
+        margin: 15px auto -30px;
+      }
+    }
+    .info {
+      max-height: 350px;
+      overflow-y: hidden;
+      .description {
+        color: #FFF;
+        @include rem('font-size', 13);
+        @include rem('line-height', 22);
+        letter-spacing: .5px;
+        font-weight: 300;
+        font-style: italic;
+        opacity: .68;
+        padding-bottom: 15px;
+      }
+      @include breakpoint(1024) {
+        max-height: 300px;
+      }
+      @include breakpoint(768) {
+        max-height: 270px;
+      }
+    }
+    .btn-discussion {
+      border-color: #FFF;
+      border-width: 1px;
+      color: #FFF;
+      @include rem('font-size', 16);
+      font-weight: 300;
+      padding: 10px 30px;
+      text-transform: uppercase;
+      @include breakpoint(992) {
+        padding: 10px 20px;
+        width: 100%;
+        max-width: 240px;
+      }
+      @include breakpoint(767) {
+        background-color: #000;
+        margin: 15px auto;
+        display: block;
+      }
+    }
+    .description-content {
+      @include breakpoint(767) {
+        background-color: #F7F2EE;
+        margin: 0 -15px;
+        padding: 55px 0 20px;
+        .info {
+          .description {
+            color: #000;
+            padding: 0 15px;
+          }
+        }
+      }
+    }
+  }
+}
+.how-it-work {
+  background-color: #FFF;
+  text-align: center;
+  padding-bottom: 60px;
+  .list {
+    display: table;
+    li {
+      display: table-cell;
+      float: none;
+      vertical-align: bottom;
+    }
+  }
+  .content {
+    padding: 0 30px;
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+  }
+  .description {
+    @include rem('font-size', 18);
+    font-weight: 300;
+    @include rem('line-height', 28);
+    padding-top: 30px;
+    padding-bottom: 30px;
+    height: 85px;
+    @include breakpoint(1024) {
+      @include rem('font-size', 16);
+    }
+    @include breakpoint(768) {
+      height: 105px;
+    }
+  }
+  @include breakpoint(767) {
+    .list {
+      display: block;
+      li {
+        display: block;
+        padding-bottom: 20px;
+      }
+      .description {
+        height: auto;
+      }
+    }
+  }
+}
+.popular-book {
+  background-color: #F7F2EE;
+  min-height: 630px;
+  @include breakpoint(1024) {
+    min-height: 0;
+  }
+  .info {
+    padding-top: 35px;
+    text-align: center;
+    .title {
+      color: #555;
+      font-family: 'Merriweather', serif;
+      @include rem('font-size', 14);
+      @include rem('line-height', 21);
+      font-weight: 400;
+      @include transition(all .1s ease);
+      .txt-link {
+        display: block;
+        color: #555;
+      }
+    }
+    .author {
+      color: #999;
+      @include rem('font-size', 14);
+      @include rem('line-height', 21);
+      font-weight: 300;
+      @include transition(all .1s ease);
+    }
+  }
+  .slider-container {
+    .slider-content {
+      min-width: 850px;
+    }
+    .slider-item {
+      float: left;
+      padding: 42px 2%;
+      width: 20%;
+      @include transition(all .3s ease);
+      cursor: pointer;
+      a {
+        display: block;
+      }
+      img {
+        max-width: 100%;
+        height: auto;
+        opacity: 0;
+      }
+      .wrap-image {
+        background-size: cover;
+        @include transition(all .3s ease);
+        border-radius: 0 3px 3px 0;
+        height: 275px;
+      }
+      &:hover {
+        transform: scale(1.2);
+        @include transition(all .3s ease);
+        .wrap-image {
+          @include transition(all .3s ease);
+          box-shadow: 0 28px 50px rgba(0, 0, 0, 0.30);
+        }
+      }
+      @include breakpoint(1024) {
+        .wrap-image {
+          height: 235px;
+        }
+        &:hover {
+          transform: none;
+          .wrap-image {
+            box-shadow: 0 12px 19px rgba(0, 0, 0, 0.24);
+          }
+        }
+      }
+      @include breakpoint(992) {
+        .wrap-image {
+          height: 215px;
+        }
+        &:hover {
+          .wrap-image {
+            height: 215px;
+          }
+        }
+      }
+      @include breakpoint(992) {
+        .wrap-image {
+          height: 215px;
+        }
+        &:hover {
+          .wrap-image {
+            height: 215px;
+          }
+        }
+      }
+      @include breakpoint(900) {
+        .wrap-image {
+          height: 200px;
+        }
+        &:hover {
+          .wrap-image {
+            height: 200px;
+          }
+        }
+      }
+      @include breakpoint(767) {
+        padding: 15px 2% !important;
+      }
+    }
+    @include breakpoint(850) {
+      overflow-x: scroll;
+    }
+  }
+}
+.block-features {
+  @extend .how-it-work;
+  .list {
+    padding-bottom: 40px;
+    @include breakpoint(767) {
+      padding-bottom: 0;
+    }
+  }
+}
+.home-container .block-signup-club, .block-signup-club {
+  background-color: #F7F2EE;
+  padding: 135px 15px 50px;;
+  text-align: center;
+  .block-title {
+    font-family: 'Merriweather', serif;
+    @include rem('font-size', 28);
+    font-weight: 300;
+    color: #191918;
+    text-transform: initial;
+    padding-bottom: 10px;
+    @include breakpoint(767) {
+      @include rem('font-size', 24);
+    }
+  }
+  .description {
+    @include rem('font-size', 16);
+    font-weight: 300;
+    color: #B0AEAD;
+  }
+  a.btn-signup-now {
+    background-color: #000;
+    color: #FFF;
+    margin-top: 25px;
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+  @include breakpoint(767) {
+    padding-top: 35px;
+  }
+}

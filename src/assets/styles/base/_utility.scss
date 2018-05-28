@@ -1,0 +1,43 @@
+.clearfix {
+  clear: both;
+}
+.center {
+  width: 1170px;
+  margin: 0 auto;
+}
+.bd0 {
+  border: none !important;
+}
+.fix-overflow-x {
+  overflow-x: hidden;
+}
+
+// Margin helper classes
+@for $i from 0 through 13 {
+  $value: $i*5;
+  $unit: "";
+  @if $i != 0 {
+    $unit: "px";
+  }
+
+  .m#{$i*5} { margin: #{$value}#{$unit} !important;}
+  .mt#{$i*5} { margin-top: #{$value}#{$unit} !important;}
+  .mr#{$i*5} { margin-right: #{$value}#{$unit} !important;}
+  .mb#{$i*5} { margin-bottom: #{$value}#{$unit} !important;}
+  .ml#{$i*5} { margin-left: #{$value}#{$unit} !important;}
+}
+
+// Padding helper classes
+@for $i from 0 through 13 {
+  $value: $i*5;
+  $unit: "";
+  @if $i != 0 {
+    $unit: "px";
+  }
+
+  .p#{$i*5} { padding: #{$value}#{$unit} !important;}
+  .pt#{$i*5} { padding-top: #{$value}#{$unit} !important;}
+  .pr#{$i*5} { padding-right: #{$value}#{$unit} !important;}
+  .pb#{$i*5} { padding-bottom: #{$value}#{$unit} !important;}
+  .pl#{$i*5} { padding-left: #{$value}#{$unit} !important;}
+}

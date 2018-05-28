@@ -1,0 +1,37 @@
+{
+  "presets": [
+    "es2015",
+    "babel-preset-stage-3",
+    "react"
+  ],
+  "plugins": [
+    ["transform-decorators-legacy"],
+    ["transform-react-jsx"],
+    ["module-resolver", {
+      "root": ["./src"],
+      "alias": {
+        "test": "./test",
+        "underscore": "lodash",
+        "base": "./src/",
+        "components": "./src/components/",
+        "assets": "./src/assets/",
+        "global_styles": "./src/assets/styles/",
+        "constants": "./src/constants",
+        "api": "./src/api/",
+        "app": "./src/components/app",
+        "pages": "./src/components/pages",
+        "layout": "./src/components/layout",
+        "modules": "./src/components/modules",
+        "build": "./build",
+        "partials": "./src/components/modules/partials"
+      }
+    }]
+  ],
+  "env": {
+    "test": {
+      "plugins": [
+        ["rewire"]
+      ]
+    }
+  }
+}
