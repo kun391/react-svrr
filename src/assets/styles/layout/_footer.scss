@@ -1,67 +1,73 @@
 .footer-container {
-  background-color: #191918;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  z-index: 10;
-  .logo-footer {
-    color: #FFF;
-    display: block;
-    @include rem('font-size', 13);
-    padding: 21px 5px;
-  }
-  .navbar-footer {
-    text-align: center;
-    white-space: nowrap;
-    .item {
-      display: inline-block;
-      .link {
-        color: #FFF;
-        display: block;
-        @include rem('font-size', 15);
-        font-weight: 300;
-        padding: 20px;
-      }
+  @include breakpoint(575) {
+    .brand, .category {
+      width: 100%;
     }
   }
-  .social-list {
-    @extend .navbar-footer;
-    text-align: right;
-  }
-  .copyright {
-    color: #545454;
-    border-top: 1px solid #333;
-    @include rem('font-size', 14);
-    padding: 20px;
-    text-align: center;
-  }
-  @include breakpoint(991) {
-    position: relative;
-    .logo-footer, .social-list {
+	background-color: $bg-footer;
+	color: $text-white;
+	font-family: $font-footer;
+	padding: 25px 0;
+	.brand {
+    @include breakpoint(575) {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    @include min-breakpoint(992) {
       text-align: center;
     }
-    .logo-footer {
-      padding-top: 40px;
+		text-align: right;
+    padding: 0;
+    .text {
+      margin-bottom: 15px;
     }
+	}
+	.brand-swivel {
+		font-family: $font-footer-brand;
+		font-size: 30px;
+		color: $text-white;
+		vertical-align: middle;
+	}
+	.brand-mizani {
+		margin-left: 15px;
+		padding-left: 15px;
+		border-left: 2px solid ;
+		border-color: rgba(255,255,255,0.5);
+		height: 55px;
+		width: 115px;
+	}
+  .category {
+    text-align: center;
   }
-  @include breakpoint(767) {
-    .navbar-footer {
-      .item {
-        display: block;
-        .link {
-          @include rem('font-size', 13);
-          padding: 10px;
-        }
+  .category-list {
+    @include breakpoint(575) {
+      text-align: center;
+    }
+    @include min-breakpoint(992) {
+      display: block;
+      li {
+        display: inline-block;
+        width: 33.33%;
+        margin-bottom: 10px;
       }
     }
-    .social-list {
-      .item {
-        display: inline-block;
-        .link {
-          @include rem('font-size', 15);
-          padding: 20px;
-        }
+    display: inline-block;
+    margin: auto;
+    text-align: left;
+    a {
+      color: $text-white;
+    }
+  }
+  .footer-row {
+    @include breakpoint(575) {
+      @include flexbox;
+      @include flex-flow(column);
+      .category {
+        @include order(1);
+        margin-bottom: 30px;
+      }
+      .brand {
+        @include order(2);
       }
     }
   }

@@ -1,17 +1,6 @@
 .clearfix {
   clear: both;
 }
-.center {
-  width: 1170px;
-  margin: 0 auto;
-}
-.bd0 {
-  border: none !important;
-}
-.fix-overflow-x {
-  overflow-x: hidden;
-}
-
 // Margin helper classes
 @for $i from 0 through 13 {
   $value: $i*5;

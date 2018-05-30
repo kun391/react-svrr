@@ -4,11 +4,13 @@ import { connect } from 'react-redux';
 import Home from 'modules/home';
 import Promise from 'bluebird';
 import PropTypes from 'prop-types';
-import { asyncConnect } from 'redux-connect'
+import { asyncConnect } from 'redux-connect';
 
 @asyncConnect([{
-  key: 'lunch',
-  promise: ({ match: { params }, helpers }) => Promise.resolve({ id: 1, name: 'Borsch' })
+  key: 'article',
+  promise: ({ match: { params: {id} }, store: { dispatch }, helpers }) => {
+    console.log('ok');
+  }
 }])
 
 class HomePage extends React.Component {

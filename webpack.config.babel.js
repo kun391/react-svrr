@@ -16,7 +16,7 @@ const {
 var _module = {
   rules: [
     {
-      test: /\.(ico|jpg|jpeg|png|gif|eot|ttf|woff|svg|less)/,
+      test: /\.(ico|jpg|jpeg|png|gif|otf|eot|ttf|woff|svg|less)/,
       loader: 'file-loader'
     }, {
       test: /\.(js|jsx)$/,
@@ -57,7 +57,7 @@ var resolve = {
     'layouts': path.resolve(__dirname, './src/components/layouts'),
     'modules': path.resolve(__dirname, './src/components/modules'),
     'build': path.resolve(__dirname, './build'),
-    'partials': path.resolve(__dirname, './src/components/modules/partials'),
+    'reducers': path.resolve(__dirname, './src/reducers'),
     'jquery': path.resolve(__dirname, 'node_modules') + '/jquery/src/jquery.js',
   }
 };
@@ -65,7 +65,7 @@ var resolve = {
 var plugins = ([
   new webpack.NoEmitOnErrorsPlugin(),
   new webpack.LoaderOptionsPlugin({
-    debug: ENV,
+    debug: true,
     options: {
       context: __dirname
     }
@@ -105,8 +105,7 @@ module.exports = function (env) {
     new webpack.DefinePlugin({
       'process.env': envars
     }),
-    new webpack.NamedModulesPlugin(),
-    new ManifestPlugin()
+    new webpack.NamedModulesPlugin()
   ];
 
   if (isProd) {
@@ -175,12 +174,13 @@ module.exports = function (env) {
         //   });
         // },
         new HtmlWebpackPlugin({
-          // template: path.resolve('./src/', 'index.ejs'),
+          template: path.resolve('./src/', 'index.html'),
           favicon: path.resolve('./src/', 'assets/images/favicon.ico'),
           minify: {
             collapseWhitespace: true
           }
-        })
+        }),
+        new ManifestPlugin()
       ),
       performance: isProd && {
         //maxAssetSize: 100,
@@ -205,7 +205,7 @@ module.exports = function (env) {
       resolve: resolve,
       devServer: {
         host: '0.0.0.0',
-        port: process.env.PORT || 3000,
+        port: process.env.PORT || 9000,
         contentBase: './',
         historyApiFallback: true
       }
@@ -252,8 +252,8 @@ module.exports = function (env) {
         }
       },
 
-      resolve: resolve
-      //devtool: ENV === 'production' ? 'source-map' : 'source-map'
+      resolve: resolve,
+      // devtool: ENV === 'production' ? 'source-map' : 'source-map'
     }
   ];
 }

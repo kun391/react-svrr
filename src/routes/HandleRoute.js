@@ -21,21 +21,24 @@ const HandleRoute = ({ routes, auth, preload }) => {
 
   return (
     <Switch>
-      {routes.map((route, i) => (
-        <Route key={i} path={route.path} exact={route.exact} strict={route.strict} render={(props) => (
-          <div>
-            {
-              route.requireLogin && !auth && route.requireLogin !== route.path && (
-                <Redirect to={{
-                  pathname: route.requireLogin,
-                  state: { from: route.path }
-                }}/>
-              )
-            }
-            <route.component {...props} route={route}/>
-          </div>
-        )}/>
-      ))}
+      {
+        routes.map((route, i) => {
+          return <Route key={i} path={route.path} exact={route.exact} strict={route.strict}
+            render={(props) => {
+              return (<div>
+                {
+                  route.requireLogin && !auth && route.requireLogin !== props.history.location.pathname && (
+                    <Redirect to={{
+                      pathname: route.requireLogin,
+                      state: { from: route.path }
+                    }}/>
+                  )
+                }
+                <route.component {...props} route={route}/>
+              </div>)
+          }} />
+        })
+      }
     </Switch>
   );
 };

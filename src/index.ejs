@@ -1,13 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <% if (production) { %>
-    <script src="https://cdn.ravenjs.com/3.24.1/raven.min.js"
-      crossorigin="anonymous"></script>
-    <script type="text/javascript">
-      Raven.config('https://5e2d109f0dae4fea8c390f8241c0cca0@sentry.io/252921').install()
-    </script>
-    <% } %>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-60040784-1"></script>
     <script>
@@ -43,11 +36,11 @@
     <meta http-equiv="cleartype" content="on">
     <link href="<%- cssFile %>" rel="stylesheet"/>
     <script type="text/javascript" charset="utf-8">
-      window.__REDUX_STATE__ = <%- reduxState %>;
+      window.__REDUX_STATE__ = <%- state %>;
     </script>
   </head>
   <body>
-    <div id="root"><%- generatedContent %></div>
+    <div id="root"><%- appHTML %></div>
     <script type="text/javascript" src="<%- jsFile %>" defer></script>
   </body>
 </html>

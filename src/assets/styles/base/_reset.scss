@@ -13,17 +13,15 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   display: block;
 }
 
-html {
-  height: 100%;
+html, body {
+  min-height: 100%;
 }
 
 body {
   background-color: #f5f5f5;
-  font-family: 'Roboto', sans-serif;
+  font-family: Arial, sans-serif;
   font-weight: 400;
-  color: #333;
-  height: 100%;
-  -webkit-font-smoothing: antialiased;
+  color: #333333;
 }
 
 ol, ul {
@@ -64,12 +62,4 @@ a {
 }
 input[type=text], textarea {
   -webkit-appearance: none;
-}
-#root, .wrapper {
-  height: 100%;
-}
-.wrapper-container {
-  min-height: 100%;
-  padding-bottom: 122px;
-  position: relative;
 }

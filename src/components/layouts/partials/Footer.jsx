@@ -1,37 +1,32 @@
 import React from 'react';
+import { Grid, Row, Col } from 'react-bootstrap';
+import { Image, Nav, NavItem } from 'react-bootstrap';
 
 class Footer extends React.Component {
- 
+
   render() {
     return (
       <footer className="footer-container">
-        <div className="container-fluid">
-          <div className="row">
-            <div className="col-md-3">
-              <a href="/" className="logo-footer"><span className="ficon ficon-logo"></span></a>
-            </div>
-            <div className="col-md-6">
-              <ul className="navbar-footer">
-                <li className="item"><a href="/books" className="link">BOOKS</a></li>
-                <li className="item"><a href="/about" className="link">ABOUT</a></li>
-                <li className="item"><a href="/faqs" className="link">FAQS</a></li>
-                <li className="item"><a href="/faqs#contact-us" className="link">CONTACT US</a></li>
+        <Grid fluid>
+          <Row className="footer-row">
+            <Col xs={6} className="brand">
+              <p className="text">About Swivel and MIZANI partnership</p>
+              <div>
+                <a href="#" className="brand-swivel">SWIVEL</a>
+                <Image className="brand-mizani" src={require('assets/images/MIZANI-logo.png')} />
+              </div>
+            </Col>
+            <Col xs={6} className="category">
+              <ul className="category-list">
+                <li><a href="#" className="link">About us</a></li>
+                <li><a href="#" className="link">Media</a></li>
+                <li><a href="#" className="link">Term for Clients</a></li>
+                <li><a href="#" className="link">Privacy</a></li>
+                <li><a href="#" className="link">Contact Support</a></li>
               </ul>
-            </div>
-            <div className="col-md-3">
-              <ul className="social-list">
-                <li className="item"><a href="https://www.facebook.com/Bookclubz-955972977760143/" target="_blank" className="link"><span className="ficon ficon-facebook"></span></a></li>
-                <li className="item"><a href="https://twitter.com/bookclubz1" target="_blank" className="link"><span className="ficon ficon-twitter"></span></a></li>
-                <li className="item"><a href="https://www.instagram.com/bookclubz1/" target="_blank" className="link"><span className="ficon ficon-instagram"></span></a></li>
-              </ul>
-            </div>
-          </div>
-          <div className="row">
-            <div className="copyright">
-              <p>&copy; 2017 Bookclubz. All rights reserved</p>
-            </div>
-          </div>
-        </div>
+            </Col>
+          </Row>
+        </Grid>
       </footer>
     );
   }

@@ -1,15 +1,13 @@
 import React from 'react';
-import {RouterContext} from 'react-router';
-import Promise from 'bluebird';
-import ReactDOMServer from 'react-dom/server';
 import {Server} from 'http';
 import {Provider} from 'react-redux';
 import cookieParser from 'cookie-parser';
 import { renderToString } from 'react-dom/server';
 import StaticRouter from 'react-router/StaticRouter';
-import { ReduxAsyncConnect, loadOnServer, reducer as reduxAsyncConnect } from 'redux-connect';
-import { HandleRoute } from './routes';
+import { ReduxAsyncConnect, loadOnServer} from 'redux-connect';
+import { routes } from './routes';
 import { parse as parseUrl } from 'url';
+import configureStore from './store';
 import { createStore, combineReducers } from 'redux';
 import serialize from 'serialize-javascript';
 
@@ -24,7 +22,6 @@ module.exports = {
 
     const match = reactRouter.match;
 
-    const routes = require('./routes/routes').default;
     let cssFile, jsFile, production;
 
     if (process.env.NODE_ENV === 'development') {
@@ -52,6 +49,7 @@ module.exports = {
       '/*.eot',
       '/*.css',
       '/*.js',
+      '/*.otf',
       '/bundle.server.js'
     ];
 
@@ -72,10 +70,9 @@ module.exports = {
     });
 
     app.get('*', (req, res) => {
-      const store = createStore(combineReducers({ reduxAsyncConnect }))
-      const url = req.originalUrl || req.url
-      const location = parseUrl(url)
-
+      const store = configureStore();
+      const url = req.originalUrl || req.url;
+      const location = parseUrl(url);
       // 1. load data
       loadOnServer({ store, location, routes })
         .then(() => {
@@ -83,42 +80,59 @@ module.exports = {
 
           // 2. use `ReduxAsyncConnect` to render component tree
           const appHTML = renderToString(
-            <Provider store={store} key="provider">
-              <StaticRouter location={location} context={context}>
-                <HandleRoute routes={routes} />
+            <Provider store={store}>
+              <StaticRouter location={req.url} context={context}>
+                <ReduxAsyncConnect routes={routes} />
               </StaticRouter>
             </Provider>
           )
+
+          let { SEO } = store.getState();
+          const state = serialize(store.getState());
+
+          const {title, description, image} = {title : 'title', description: 'desc', image: 'http://google.com'};
+          let url = ``;
+
+          let fb_appId = 'agag';
+          const sitename = "SWIVEL";
+
           // handle redirects
           if (context.url) {
             return res.redirect(context.url);
-          //   req.header('Location', context.url)
-          //   return res.send(302)
-          }
+          } else {
+            let fs = require('fs');
+            let data = fs.readFileSync('./build/manifest.json');
+            let manifest = JSON.parse(data);
 
-          // 3. render the Redux initial data into the server markup
-          const html = createPage(appHTML, store)
-          res.send(html)
-        })
+            let jsFile = '/' + manifest['app.js'];
+            let jsVendorFile = '/' + manifest['vendor.js'];
+            let cssFile = '/' + manifest['app.css'];
+
+            ejs.renderFile(
+              path.resolve('./src/index.ejs' ),
+              {
+                jsFile,
+                cssFile,
+                production,
+                title,
+                description,
+                image,
+                appHTML,
+                state
+              }, {},
+              function(err, str) {
+                if (err) {
+                  console.log(err);
+                }
+                res.writeHead(200);
+                res.write(str);
+                res.end();
+              });
+          }
+        });
     });
 
-    function createPage(html, store) {
-      return `
-        <!doctype html>
-        <html>
-          <body>
-            <div id="app">${html}</div>
-
-            <!-- its a Redux initial data -->
-            <script type="text/javascript">
-              window.__REDUX__=${serialize(store.getState())};
-            </script>
-          </body>
-        </html>
-      `
-    }
-
-    server.listen(8081, function() {
+    server.listen(3000, function() {
       console.log(`Listening at http://localhost:${server.address().port}`);
     });
   }

@@ -1,19 +1,16 @@
-import { Home } from 'containers/pages';
+import { HomePage } from 'containers/pages';
 import App from 'containers/App';
 
-const routes = [{
+export default [{
   component: App,
   requireLogin: '/login',
-  home: '/',
   routes: [{
     path: '/',
     exact: true,
-    component: Home
+    component: HomePage
   },{
-        path: '/login',
-        exact: true,
-        component: Home
-      },]
+      path: '/login',
+      exact: true,
+      component: HomePage
+    }]
 }];
-
-export default routes;
