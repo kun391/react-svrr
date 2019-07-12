@@ -1,4 +1,4 @@
-# Swivel-5 Frontend
+# React SVR Frontend
 
 ## Requirements installed
 
@@ -11,8 +11,8 @@ These are the minimum requirements for the project setup:
 
 Open your preferred command line tool and run follow some steps below:
 
-1. __`git clone git@bitbucket.org:toancauxanh/swivel5-fe.git`__.
-2. `cd swivel5-fe`.
+1. __`git clone git@github.com:kun391/react-svrr.git`__.
+2. `cd react-svrr`.
 3. `npm install` automatically to install plugins required for the build script based in `package.json` file.
 4. `npm run dev` run webpack.
 5. `npm run server` in new command to start server locally. The, run the url `http://localhost:3000` in your browser.
@@ -23,7 +23,7 @@ Open your preferred command line tool and run follow some steps below:
 
 ````
 
-bookclubz/
+react-svrr/
 ├── src/
 │   ├── actions
 │   ├── api
@@ -45,7 +45,7 @@ bookclubz/
 ````
 
 ## Deployment
-1. __`git clone git@bitbucket.org:toancauxanh/swivel5-fe.git`__.
-2. `cd swivel5-fe`.
+1. __`git clone git@github.com:kun391/react-svrr.git`__.
+2. `cd react-svrr`.
 3. `npm install` automatically to install plugins required for the build script based in `package.json` file.
 4. `npm run prod` to build the production version and run the server.
